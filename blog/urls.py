@@ -3,5 +3,6 @@ from django.contrib import admin
 from .views import *
 
 urlpatterns = [
-    path('main/', main_view)
+    path('', main_view, name='main_url'),
+    path('post/<str:slug>/', post_view, name='post_detail_url')
 ]
