@@ -1,0 +1,29 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}
+  Tag Create - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+            <!--action указывает на обработчика формы -->
+            <form class="" action="{% url 'tag_create_url' %}" method="post">
+              {% csrf_token %}
+
+              {% for field in form %} <!--цикл для каждого поля вывести его текс.название+самое поле  -->
+                  <div class="form-group">
+                      {% if field.errors %}  <!--проверка на ошибку, если тру, красное сообщение и саму ошибку  -->
+                          <div class="alert alert-danger">
+                              {{ field.errors }}
+                          </div>
+                    {% endif %}
+
+                    {{ field.label }}
+                    {{ field }}
+                  </div>
+                  
+              {% endfor %}
+
+              <button type="submit" class='btn btn-primary'>Create Tag</button>
+            </form>
+
+{% endblock %}
