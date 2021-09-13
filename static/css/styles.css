@@ -1,0 +1,22 @@
+.admin-panel {
+    border: 1px solid #999; /* граница 1пк цвет оч серый */
+    border-radius: 2px; /* закругленные края */
+    position: fixed; /* позиция */
+    right: 50px; /* от правого 50пк */
+    bottom: 30px; /* снизу 30 пк */
+    opacity: 0.3; /* прозрачность */
+    padding: 15px; /* 'разжать' */
+}
+
+.admin-panel:hover {
+  opacity: 1; /* не прозрачность  при наводке */
+}
+
+.admin-panel a {
+  display: block;
+  margin: 5px 0; /* оступ между кнопками */
+}
+
+a.edit, a.delete {
+  display: none;
+}
