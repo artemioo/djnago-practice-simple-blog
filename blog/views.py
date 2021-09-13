@@ -20,6 +20,9 @@ class PostUpdate(ObjectUpdateixin, View):
     model_form = PostForm
     template = 'blog/post_update_form.html'
 
+class PostDelete(ObjectDeleteMixin, View):
+    model = Post
+    template = 'blog/post_delete_form.html'
 
 class PostCreate(ObjectCreateMixin, View):
     form_model = PostForm
@@ -63,6 +66,9 @@ class TagUpdate(ObjectUpdateixin, View):
     model_form = TagForm
     template = 'blog/tag_update_form.html'
 
+class TagDelete(ObjectDeleteMixin, View):
+    model = Tag
+    template = 'blog/tag_delete_form.html'
 
 def tags_list(request):
     tags = Tag.objects.all()
