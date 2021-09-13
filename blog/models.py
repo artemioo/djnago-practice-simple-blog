@@ -17,8 +17,11 @@ class Post(models.Model):
     tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
     date_pub = models.DateField(auto_now_add=True)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self): #соглашение
         return reverse('post_detail_url', kwargs={'slug': self.slug})
+
+    def get_update_url(self): #кастомная функция
+        return reverse('post_update_url', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title  #переопредили метод str для отображения
@@ -33,8 +36,11 @@ class Tag(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self): #соглашение
         return reverse('tag_detail_url', kwargs={'slug': self.slug})
+
+    def get_update_url(self): #кастомная функция
+        return reverse('tag_update_url', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title

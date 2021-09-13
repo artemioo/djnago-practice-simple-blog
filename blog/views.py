@@ -15,6 +15,12 @@ class PostDetail(ObjectDetailMixin, View):
     template = 'blog/post_detail.html'
 
 
+class PostUpdate(ObjectUpdateixin, View):
+    model = Post
+    model_form = PostForm
+    template = 'blog/post_update_form.html'
+
+
 class PostCreate(ObjectCreateMixin, View):
     form_model = PostForm
     template = 'blog/post_create_form.html'
@@ -51,6 +57,11 @@ class TagCreate(ObjectCreateMixin, View):
     #         return redirect(new_tag) # перенаправь
     #
     #     return render(request, 'blog/tag_create.html', context={'form': bound_form})
+
+class TagUpdate(ObjectUpdateixin, View):
+    model = Tag
+    model_form = TagForm
+    template = 'blog/tag_update_form.html'
 
 
 def tags_list(request):
