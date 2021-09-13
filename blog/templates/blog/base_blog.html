@@ -2,15 +2,15 @@
 
 {% block admin-panel %}
     <div class="btn-group">
-      <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         Create
       </button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu"> <!--выпадаещие меню с перенаправлением -->
           <li><a class="dropdown-item" href="{% url 'post_create_url' %}">Post</a></li>
           <li><a class="dropdown-item" href="{% url 'tag_create_url' %}">Tag</a></li>
       </ul>
     </div>
-
+    <!-- мы передаем наш объект + обращаемся к его урлу, и если у нас не просматривается детали - блокируем отоброжение -->
   <a href="{{ admin_object.get_update_url }}" class="btn btn-light edit" style='{% if detail %} display: block; {% endif %}'">Update</a>
   <a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete" style='{% if detail %} display: block; {% endif %}'>Delete</a>
 {% endblock %}

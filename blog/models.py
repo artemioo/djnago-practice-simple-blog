@@ -23,7 +23,7 @@ class Post(models.Model):
     def get_update_url(self): #кастомная функция
         return reverse('post_update_url', kwargs={'slug': self.slug})
 
-    def get_delete_url(self):
+    def get_delete_url(self): #кастомная функция
         return reverse('post_delete_url', kwargs={'slug': self.slug})
 
     def __str__(self):
@@ -45,7 +45,7 @@ class Tag(models.Model):
     def get_update_url(self): #кастомная функция
         return reverse('tag_update_url', kwargs={'slug': self.slug})
 
-    def get_delete_url(self):
+    def get_delete_url(self): #кастомная функция
         return reverse('tag_delete_url', kwargs={'slug': self.slug})
 
     def __str__(self):

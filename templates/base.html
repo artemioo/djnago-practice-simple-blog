@@ -60,11 +60,16 @@
     </div>
   </div>
 </div>
-<div class="admin-panel allign-items-center">
-  <a href="/admin" class='btn btn-outline-info'>Admin</a>
-  {% block admin-panel %}{% endblock %}
 
-</div>
+  {% if request.user.is_authenticated and request.user.is_staff %}
+  <div class="admin-panel allign-items-center">
+    <a href="/admin" class='btn btn-outline-info'>Admin</a>
+    {% block admin-panel %}{% endblock %}
+
+  </div>
+  {% endif %}
+
+
 
 </body>
 </html>
