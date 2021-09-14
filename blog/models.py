@@ -14,7 +14,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150, db_index=True) #ставим индексирование для быстрого поиска
     slug = models.SlugField(max_length=150, unique=True, blank=True) #уник. поля по умолчанию индексируются
     body = models.TextField(blank=True, db_index=True)
-    tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
+    tags = models.ManyToManyField('Tag', blank=True, related_name='posts') #связь
     date_pub = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self): #соглашение
@@ -34,6 +34,9 @@ class Post(models.Model):
             self.slug = gen_slug(self.title) #генерация с помощью функции
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['date_pub']
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
@@ -50,3 +53,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['title']
