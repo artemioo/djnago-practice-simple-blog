@@ -6,22 +6,30 @@ from django.views.generic import View
 from .forms import TagForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def main_view(request):
-    posts = Post.objects.all() #получаем QuerySet наших постов
+    search_query = request.GET.get('search', '') #достаем из нашей формы search, и по search достаем из словаря значение
+
+    if search_query:
+        posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query)) #отфильтруй по содержанию и в назв. и в теле
+    else:
+        posts = Post.objects.all() #получаем QuerySet наших постов
+
+
     paginator = Paginator(posts, 3) # создаем пагинатор, передаем QuerySet и кол-во отображаемых постов
 
     page_number = request.GET.get('page', 1) #обращаемся к словарю GET объекта request и получаем с помощью метода get значение ключа page
     page = paginator.get_page(page_number) #достаем нужную страницу
 
-    is_paginated = page.has_other_pages()
+    is_paginated = page.has_other_pages() #если есть другие страницы
 
-    if page.has_previous():
+    if page.has_previous(): #если есть пред. подставь ее номер
         prev_url = '?page={}'.format(page.previous_page_number())
     else:
         prev_url = ''
 
-    if page.has_next():
+    if page.has_next(): #если есть след. подставь ее номер
         next_url = '?page={}'.format(page.next_page_number())
     else:
         next_url = ''
